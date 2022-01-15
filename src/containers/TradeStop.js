@@ -3,7 +3,6 @@ import TradeForm from '../components/tradeForm';
 import TradeTable from '../components/tradeTable';
 import { Container, Header, Divider, Button, Modal, Icon } from 'semantic-ui-react';
 
-
 const tradeData = [
   { 
     id: 1,
@@ -12,8 +11,8 @@ const tradeData = [
     emove: 10, // percentage 
     etime: 3, // hours
     conf: 8, // confidence level 1-10
-    instinct: false,
-    pending: false,
+    inst: false,
+    status: false,
     supres: false,
     success: true,
     amove: 15,
@@ -28,8 +27,8 @@ const tradeData = [
     emove: 20, // percentage 
     etime: 6, // hours
     conf: 6, // confidence level 1-10
-    instinct: false,
-    pending: true,
+    inst: false,
+    status: true,
     supres: false,
     success: true,
     amove: 10,
@@ -44,8 +43,8 @@ const tradeData = [
     emove: 20, // percentage 
     etime: 12, // hours
     conf: 6, // confidence level 1-10
-    instinct: false,
-    pending: true,
+    inst: false,
+    status: true,
     supres: false,
     success: true,
     amove: 12,
@@ -60,8 +59,8 @@ const tradeData = [
     emove: 10, // percentage 
     etime: 24, // hours
     conf: 7, // confidence level 1-10
-    instinct: true,
-    pending: false,
+    inst: true,
+    status: false,
     supres: false,
     success: true,
     amove: 4,
@@ -76,8 +75,8 @@ const tradeData = [
     emove: 14, // percentage 
     etime: 2, // hours
     conf: 6, // confidence level 1-10
-    instinct: true,
-    pending: false,
+    inst: true,
+    status: false,
     supres: true,
     success: true,
     amove: 10,
@@ -88,23 +87,54 @@ const tradeData = [
 ]
 
 const TradeStop = () => {
-  const [open, setOpen] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+  const [itemModal, setItemModal] = useState(false);
 
   return (
     <Container >
       <div style={{ padding: "20px"}}>
         <Header as="h1" style={{fontSize: '42px'}}>TradeStop</Header>
         <Divider section />
-
-        <TradeTable data={tradeData} />
+        <TradeTable tradeData={tradeData} />
 
         <Modal
-          // basic
-          onClose={() => setOpen(false)}
-          onOpen={() => setOpen(true)}
-          open={open}
+          onClose={() => setItemModal(false)}
+          onOpen={() => setItemModal(true)}
+          open={itemModal}
+          trigger={<Button>Show Item</Button>}
+        >
+          <Modal.Header>Select a Photo</Modal.Header>
+          <Modal.Content image>
+            {/* <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped /> */}
+            <Modal.Description>
+              <Header>Default Profile Image</Header>
+              <p>
+                We've found the following gravatar image associated with your e-mail
+                address.
+              </p>
+              <p>Is it okay to use this photo?</p>
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color='black' onClick={() => setItemModal(false)}>
+              Nope
+            </Button>
+            <Button
+              content="Yep, that's me"
+              labelPosition='right'
+              icon='checkmark'
+              onClick={() => setItemModal(false)}
+              positive
+            />
+          </Modal.Actions>
+        </Modal>
+
+        <Modal
+          onOpen={() => setAddModal(true)}
+          onClose={() => setAddModal(false)}
+          open={addModal}
           size='tiny'
-          trigger={ <Button color="green" size="massive" className="newpost-btn">+ New Post</Button> }
+          trigger={ <Button color="green" size="massive" className="newpost-btn">+ Add Trade</Button> }
         >
           <Header icon>
             <Icon name='archive' />
@@ -120,14 +150,18 @@ const TradeStop = () => {
           </Modal.Content>
 
           <Modal.Actions>
-            <Button basic color='red' inverted onClick={() => setOpen(false)}>
+            <Button basic color='red' inverted onClick={() => setAddModal(false)}>
               <Icon name='remove' /> No
             </Button>
-            <Button color='green' inverted onClick={() => setOpen(false)}>
+            <Button color='green' inverted onClick={() => setAddModal(false)}>
               <Icon name='checkmark' /> Yes
             </Button>
           </Modal.Actions>
         </Modal>
+
+
+
+
       </div>
     </Container>
   )

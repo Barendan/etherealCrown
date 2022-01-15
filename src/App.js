@@ -7,7 +7,7 @@ import {
 import GetMoney from './containers/GetMoney';
 import TodoApp from './containers/TodoApp';
 import TradeStop from './containers/TradeStop';
-import Calendar from './containers/Calendar';
+import Calendar from './containers/CalendarPage';
 import BlogPage from './containers/BlogPage';
 import './App.css';
 
