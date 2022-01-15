@@ -7,11 +7,11 @@ import { Container, Header, Divider, Button, Modal, Icon } from 'semantic-ui-rea
 const tradeData = [
   { 
     id: 1,
-    currency: 'SOS-USDT',
+    pair: 'SOS-USDT',
     buysell: true, 
-    pmove: 10, // percentage 
-    ptime: 3, // hours
-    clevel: 8, // confidence level 1-10
+    emove: 10, // percentage 
+    etime: 3, // hours
+    conf: 8, // confidence level 1-10
     instinct: false,
     pending: false,
     supres: false,
@@ -23,11 +23,11 @@ const tradeData = [
   },
   { 
     id: 2,
-    currency: 'EOS-USDT',
+    pair: 'EOS-USDT',
     buysell: true, 
-    pmove: 20, // percentage 
-    ptime: 6, // hours
-    clevel: 6, // confidence level 1-10
+    emove: 20, // percentage 
+    etime: 6, // hours
+    conf: 6, // confidence level 1-10
     instinct: false,
     pending: true,
     supres: false,
@@ -39,11 +39,11 @@ const tradeData = [
   },
   { 
     id: 3,
-    currency: 'ADA-USDT',
+    pair: 'ADA-USDT',
     buysell: false, 
-    pmove: 20, // percentage 
-    ptime: 12, // hours
-    clevel: 6, // confidence level 1-10
+    emove: 20, // percentage 
+    etime: 12, // hours
+    conf: 6, // confidence level 1-10
     instinct: false,
     pending: true,
     supres: false,
@@ -55,11 +55,11 @@ const tradeData = [
   },
   { 
     id: 4,
-    currency: 'BTC-USDT',
+    pair: 'BTC-USDT',
     buysell: true, 
-    pmove: 10, // percentage 
-    ptime: 24, // hours
-    clevel: 7, // confidence level 1-10
+    emove: 10, // percentage 
+    etime: 24, // hours
+    conf: 7, // confidence level 1-10
     instinct: true,
     pending: false,
     supres: false,
@@ -71,11 +71,11 @@ const tradeData = [
   },
   { 
     id: 5,
-    currency: 'ETH-USDT',
+    pair: 'ETH-USDT',
     buysell: false, 
-    pmove: 14, // percentage 
-    ptime: 2, // hours
-    clevel: 6, // confidence level 1-10
+    emove: 14, // percentage 
+    etime: 2, // hours
+    conf: 6, // confidence level 1-10
     instinct: true,
     pending: false,
     supres: true,

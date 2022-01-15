@@ -1,19 +1,21 @@
 import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 
-// Takes in data and plugs it into the table
-// Each item will have edit / del button
-// onClick will be passed down from TradeStop
+// Read Data into Table
+// Each item has onclick edit / del
+// onClick passed down from Parent
 
-const TradeTable = ({data}, ) => {
-
-
-  return (
-    <Table celled>
+const TradeTable = (data, handleDel, handleEdit) => (
+  <Table basic="very" padded="very" sortable selectable>
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell>Header</Table.HeaderCell>
-        <Table.HeaderCell>Header</Table.HeaderCell>
-        <Table.HeaderCell>Header</Table.HeaderCell>
+        <Table.HeaderCell>ID</Table.HeaderCell>
+        <Table.HeaderCell>PAIR</Table.HeaderCell>
+        <Table.HeaderCell>BUY/SELL</Table.HeaderCell>
+        <Table.HeaderCell>Exp. Move</Table.HeaderCell>
+        <Table.HeaderCell>Exp. Time</Table.HeaderCell>
+        <Table.HeaderCell>Confidence</Table.HeaderCell>
+        <Table.HeaderCell>Instinct</Table.HeaderCell>
+        <Table.HeaderCell>Pending</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
 
@@ -24,13 +26,28 @@ const TradeTable = ({data}, ) => {
         </Table.Cell>
         <Table.Cell>Cell</Table.Cell>
         <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>Cell</Table.Cell>
         <Table.Cell>Cell</Table.Cell>
         <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
       </Table.Row>
       <Table.Row>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
+        <Table.Cell>Cell</Table.Cell>
         <Table.Cell>Cell</Table.Cell>
         <Table.Cell>Cell</Table.Cell>
         <Table.Cell>Cell</Table.Cell>
@@ -39,7 +56,7 @@ const TradeTable = ({data}, ) => {
 
     <Table.Footer>
       <Table.Row>
-        <Table.HeaderCell colSpan='3'>
+        <Table.HeaderCell colSpan='8'>
           <Menu floated='right' pagination>
             <Menu.Item as='a' icon>
               <Icon name='chevron left' />
@@ -56,7 +73,6 @@ const TradeTable = ({data}, ) => {
       </Table.Row>
     </Table.Footer>
   </Table>
-  )
-}
+)
 
 export default TradeTable;
