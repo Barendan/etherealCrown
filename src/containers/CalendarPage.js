@@ -1,16 +1,76 @@
 import { useState, useEffect } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import { Container, Header, Divider, Button, Modal, Icon } from 'semantic-ui-react';
+import { Calendar, momentLocalizer, Event } from 'react-big-calendar';
 import moment from 'moment'
+import { Container, Header, Divider, Button, Modal, Icon } from 'semantic-ui-react';
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+
+
+// ---------------------------------------------------------
+// ---------------------------------------------------------
+import { db } from '../firebase';
+import {
+  doc, 
+  addDoc, 
+  collection, 
+  onSnapshot, 
+  query, 
+  orderBy, 
+  deleteDoc, 
+  setDoc 
+} from "firebase/firestore";
+
+
+
+  
+  
+  //ADDING LISTS
+  // const handleClick = (e) => {
+  //   e.preventDefault()
+    
+  //   if(input) {
+  //     addDoc(collection(db, "shopping-lists"), {
+  //       name: input,
+  //       timestamp: new Date()
+  //     }).catch(err => console.error(err))
+  //   }//end of If statement
+    
+  // }//end of handleClick
+  
+  // //DELETE A DOC
+  // async function deleteDocument(id) {
+  //   let request = await deleteDoc(doc(db, "shopping-lists", id));
+  //   console.log(request)
+  // }
+  
+  // //UPDATE A DOC
+  
+  // async function updateDocument(id) {
+  //   const itemRef = doc(db, "shopping-lists", id);
+  //   let name =  prompt("What would you like to update it to?")
+  //   setDoc(itemRef, {
+  //     name: name,
+  //     timestamp: new Date()
+  //   })
+  // }
+  // ---------------------------------------------------------
+  // ---------------------------------------------------------
 
 const localizer = momentLocalizer(moment);
 
-const events = [
+
+const eventsDemo = [
   {
       title: "Big Meeting",
       allDay: true,
       start: new Date(2022, 0, 3),
       end: new Date(2022, 0, 3),
+  },
+  {
+      title: "Meditation",
+      allDay: true,
+      start: new Date(2022, 0, 5),
+      end: new Date(2022, 0, 5),
   },
   {
       title: "Vacation",
@@ -25,12 +85,42 @@ const events = [
 ];
 
 const CalendarPage = () => {
-  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-  const [allEvents, setAllEvents] = useState(events);
+  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "", allDay: true });
+  const [allEvents, setAllEvents] = useState(eventsDemo);
 
-  function handleAddEvent() {
-    setAllEvents([...allEvents, newEvent]);
+  useEffect(()=> {
+    const createEvent = async (event) => {
+      await addDoc(collection(db, 'events'), event);
+    };
+    createEvent(eventsDemo[2]);
+    
+    const q = query(collection(db, "events"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      setAllEvents(querySnapshot.docs.map(doc => {
+        let item = doc.data();
+        item.start = toDateTime(item.start.seconds);
+        item.end = toDateTime(item.end.seconds);
+        return item
+      }))
+    })
+
+    return () => unsubscribe()
+  }, []);
+
+  function toDateTime(secs) {
+    let t = new Date(1970, 0, 1); // Epoch
+    t.setSeconds(secs);
+    return t;
   }
+
+
+  
+  
+  // console.log('list of events:', allEvents)
+
+  // function handleAddEvent() {
+  //   setAllEvents([...allEvents, newEvent]);
+  // }
   
   return (
     <Container style={{padding: 20}}>
@@ -57,13 +147,14 @@ const CalendarPage = () => {
 
       </div> */}
       
-      <div style={{width: '800px', margin: '0 auto'}}>
+      <div style={{width: '840px', margin: '0 auto'}}>
         <Calendar
           localizer={localizer}
-          events={events}
+          events={allEvents}
           startAccessor="start"
           endAccessor="end"
-          style={{ width: 800, height: 500 }}
+          resizable
+          style={{ height: '70vh' }}
           />
         </div>
     </Container>
