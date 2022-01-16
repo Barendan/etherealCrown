@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { Container, Header, Divider, Button, Modal, Icon } from 'semantic-ui-react';
+
 import TradeForm from '../components/tradeForm';
 import TradeTable from '../components/tradeTable';
-import { Container, Header, Divider, Button, Modal, Icon } from 'semantic-ui-react';
+import {db} from '../firebase';
 
 const tradeData = [
   { 
@@ -87,17 +90,39 @@ const tradeData = [
 ]
 
 const TradeStop = () => {
+  const [allTrades, setAllTrades] = useState([]);
   const [addModal, setAddModal] = useState(false);
   const [itemModal, setItemModal] = useState(false);
+
+  useEffect(() => {
+    const q = query(collection(db, 'trades'), orderBy('created', 'desc'))
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      setAllTrades(querySnapshot.docs.map(doc => {
+        let item = doc.data();
+        item.created = toDateTime(item.created.seconds);
+        return item
+      }))
+    })
+
+    return () => unsubscribe();
+  },[])
+
+  function toDateTime(secs) {
+    let t = new Date(1970, 0, 1); // Epoch
+    t.setSeconds(secs);
+    return t;
+  }
+
+  console.log('show alltrades', allTrades)
 
   return (
     <Container >
       <div style={{ padding: "20px"}}>
         <Header as="h1" style={{fontSize: '42px'}}>TradeStop</Header>
         <Divider section />
-        <TradeTable tradeData={tradeData} />
+        <TradeTable data={allTrades} />
 
-        <Modal
+        {/* <Modal
           onClose={() => setItemModal(false)}
           onOpen={() => setItemModal(true)}
           open={itemModal}
@@ -105,7 +130,6 @@ const TradeStop = () => {
         >
           <Modal.Header>Select a Photo</Modal.Header>
           <Modal.Content image>
-            {/* <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped /> */}
             <Modal.Description>
               <Header>Default Profile Image</Header>
               <p>
@@ -127,7 +151,7 @@ const TradeStop = () => {
               positive
             />
           </Modal.Actions>
-        </Modal>
+        </Modal> */}
 
         <Modal
           onOpen={() => setAddModal(true)}
@@ -159,8 +183,7 @@ const TradeStop = () => {
           </Modal.Actions>
         </Modal>
 
-
-
+        <Divider section />
 
       </div>
     </Container>
@@ -168,3 +191,5 @@ const TradeStop = () => {
 }
 
 export default TradeStop;
+
+
