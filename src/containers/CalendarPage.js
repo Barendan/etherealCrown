@@ -5,59 +5,15 @@ import { Container, Header, Divider, Button, Modal, Icon } from 'semantic-ui-rea
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-
-// ---------------------------------------------------------
-// ---------------------------------------------------------
-import { db } from '../firebase';
 import {
-  doc, 
   addDoc, 
   collection, 
   onSnapshot, 
   query, 
-  orderBy, 
-  deleteDoc, 
-  setDoc 
 } from "firebase/firestore";
-
-
-
-  
-  
-  //ADDING LISTS
-  // const handleClick = (e) => {
-  //   e.preventDefault()
-    
-  //   if(input) {
-  //     addDoc(collection(db, "shopping-lists"), {
-  //       name: input,
-  //       timestamp: new Date()
-  //     }).catch(err => console.error(err))
-  //   }//end of If statement
-    
-  // }//end of handleClick
-  
-  // //DELETE A DOC
-  // async function deleteDocument(id) {
-  //   let request = await deleteDoc(doc(db, "shopping-lists", id));
-  //   console.log(request)
-  // }
-  
-  // //UPDATE A DOC
-  
-  // async function updateDocument(id) {
-  //   const itemRef = doc(db, "shopping-lists", id);
-  //   let name =  prompt("What would you like to update it to?")
-  //   setDoc(itemRef, {
-  //     name: name,
-  //     timestamp: new Date()
-  //   })
-  // }
-  // ---------------------------------------------------------
-  // ---------------------------------------------------------
+import { db } from '../firebase';
 
 const localizer = momentLocalizer(moment);
-
 
 const eventsDemo = [
   {
