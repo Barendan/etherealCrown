@@ -178,7 +178,9 @@ h2 a {
 /* ======================================================================= */
                   /* NOAUTH PAGE */
 /* ======================================================================= */
-html { 
+.noauth-container {
+  width: 100vw;
+  height: 100vh;
   background: url(http://cdn.magdeleine.co/wp-content/uploads/2014/05/3jPYgeVCTWCMqjtb7Dqi_IMG_8251-1400x933.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
