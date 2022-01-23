@@ -9,6 +9,7 @@ import TodoApp from './containers/TodoApp';
 import TradeStop from './containers/TradeStop';
 import Calendar from './containers/CalendarPage';
 import BlogPage from './containers/BlogPage';
+import NoAuth from './containers/NoAuth';
 import './App.css';
 
 import { signInWithPopup, signOut, GoogleAuthProvider } from 'firebase/auth';
@@ -52,30 +53,35 @@ const googleHandler = async () => {
 
 const Home = () => <>
     <h1 style={{ padding: "1.2rem", fontSize: "42px"}}> Portal Directory</h1>
-    <ul>
-      <li style={{padding: "1.5rem", fontSize: "24px"}}>  
+    <ul style={{display: 'inline-block', listStyle: 'devanagari', color: '#fff' }}>
+      <li style={{padding: "1.5rem", fontSize: "1.3rem"}}>  
         <NavLink to="calendar">
           Calendar
         </NavLink> 
       </li>
-      <li style={{padding: "1.5rem", fontSize: "24px"}}>  
+      <li style={{padding: "1.5rem", fontSize: "1.3rem"}}>  
         <NavLink to="blog">
           Blog Page
         </NavLink> 
       </li>
-      <li style={{padding: "1.5rem", fontSize: "24px"}}>  
+      <li style={{padding: "1.5rem", fontSize: "1.3rem"}}>  
         <NavLink to="trade">
           TradeStop
         </NavLink> 
       </li>
-      <li style={{padding: "1.5rem", fontSize: "24px"}}>  
+      <li style={{padding: "1.5rem", fontSize: "1.3rem"}}>  
         <NavLink to="million">
           Quick Milly
         </NavLink> 
       </li>
-      <li style={{padding: "1.5rem", fontSize: "24px"}}>  
+      <li style={{padding: "1.5rem", fontSize: "1.3rem"}}>  
         <NavLink to="todo">
           Mini Todo App
+        </NavLink> 
+      </li>
+      <li style={{padding: "1.5rem", fontSize: "1.3rem"}}>  
+        <NavLink to="noauth">
+          No Auth
         </NavLink> 
       </li>
     </ul>
@@ -92,6 +98,7 @@ export default function App() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/" element={<Home />} />
+          <Route path="/noauth" element={<NoAuth />} />
         </Routes>
       </div>
     </Router>

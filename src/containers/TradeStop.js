@@ -113,12 +113,10 @@ const TradeStop = () => {
     return t;
   }
 
-  console.log('show alltrades', allTrades)
-
   return (
-    <Container >
+    <Container fluid className="trade-container">
       <div style={{ padding: "20px"}}>
-        <Header as="h1" style={{fontSize: '42px'}}>TradeStop</Header>
+        <Header as="h1" style={{fontSize: '50px', color: 'white'}}>Cryptopia</Header>
         <Divider section />
         <TradeTable data={allTrades} />
 
@@ -158,15 +156,15 @@ const TradeStop = () => {
           onClose={() => setAddModal(false)}
           open={addModal}
           size='tiny'
-          trigger={ <Button color="green" size="massive" className="newpost-btn">+ Add Trade</Button> }
+          trigger={ <Button size="massive" className="newpost-btn">+ Add Trade</Button> }
         >
           <Header icon>
-            <Icon name='archive' />
+            {/* <Icon name='archive' /> */}
             {/* Archive Old Messages */}
           </Header>
 
           <Modal.Content>
-            <TradeForm />
+            <TradeForm addModal={setAddModal}/>
             {/* <p>
               Your inbox is getting full, would you like us to enable automatic
               archiving of old messages?
@@ -174,14 +172,26 @@ const TradeStop = () => {
           </Modal.Content>
 
           <Modal.Actions>
-            <Button basic color='red' inverted onClick={() => setAddModal(false)}>
+            {/* <Button basic color='red' inverted onClick={() => setAddModal(false)}>
               <Icon name='remove' /> No
             </Button>
             <Button color='green' inverted onClick={() => setAddModal(false)}>
               <Icon name='checkmark' /> Yes
-            </Button>
+            </Button> */}
           </Modal.Actions>
         </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
 
         <Divider section />
 

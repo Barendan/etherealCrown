@@ -114,7 +114,11 @@ const Blog = () => {
         onOpen={() => setOpen(true)}
         open={open}
         size='small'
-        trigger={ <Button color="green" size="massive" className="newpost-btn">+ New Post</Button> }
+        trigger={ 
+          <Button color="green" size="massive" className="newpost-btn">
+            + New Post
+          </Button> 
+        }
       >
         <Header icon>
           <Icon name='archive' />
@@ -128,40 +132,41 @@ const Blog = () => {
             onSubmit={handleSubmit}
             error={error}
           >
-          <Form.Group widths='equal'>
-            <Form.Field
-              control={Input}
-              name="pair"
-              label='Currency Pair:'
-              placeholder='BTC-USDT'
-              value={sField.pair}
-              onChange={(e,data) => updateSField("pair", data.value)}
-            />
-          </Form.Group>
-
-
-          <Form.Group widths="5">
-            <Form.Checkbox 
-              toggle 
-              label="Sup or Res?"
-              checked={sField.supres}
-              onClick={() => updateSField("supres",  !sField.supres)}
-            />
-            <Form.Checkbox 
-              toggle 
-              label="Instinct"
-              checked={sField.inst}
-              onClick={() => updateSField("inst",  !sField.inst)}
-            />
+            <Form.Group widths='equal'>
+              <Form.Field
+                control={Input}
+                name="title"
+                label="Title"
+                placeholder='My New Title'
+                value={sField.title}
+                onChange={(e,data) => updateSField("title", data.value)}
+              />
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field
+                control={Input}
+                name="content"
+                label="Content"
+                placeholder='Once upon a time...'
+                value={sField.content}
+                onChange={(e,data) => updateSField("content", data.value)}
+              />
+            </Form.Group>
+            <Form.Group widths="5">
+              <Form.Checkbox 
+                toggle 
+                label="Public or Private"
+                checked={sField.public}
+                onClick={() => updateSField("public",  !sField.public)}
+              />
+            </Form.Group>
             
-          </Form.Group>
-          {/* {error} */}
-          <Message
-            error
-            header='Error Occurred'
-            content="You forgot to fill out a field."
-          />
-          <Form.Field control={Button}>Add Trade</Form.Field>
+            <Message
+              error
+              header='Error Occurred'
+              content="You forgot to fill out a field."
+            />
+            <Form.Field control={Button}>Create Post</Form.Field>
           </Form>
 
 

@@ -45,7 +45,7 @@ const defaultFields = {
   status: false,
 }
 
-const TradeForm = () => {
+const TradeForm = ({addModal}) => {
   const [ sField, setSField ] = useState(defaultFields);
   const [ error, setError ] = useState(false);
 
@@ -73,7 +73,8 @@ const TradeForm = () => {
     else {
       setError(true);
     }
-
+    
+    addModal(false);
     setSField(defaultFields);
     // setTimeout(() => {
     //   alert(JSON.stringify(sField, null, 2));

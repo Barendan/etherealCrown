@@ -5,7 +5,7 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 // onClick passed down from Parent
 
 const TradeTable = ({data}, handleEdit, handleDel) => {
-  const headerRow = ['ID', 'PAIR', 'BUYSELL', 'EXP. MOVE', 'EXP. TIME', 'CONF', 'INST', 'STATUS', 'CREATED', ''];
+  const headerRow = ['ID', 'PAIR', 'BUYSELL', 'EXP. MOVE', 'EXP. TIME', 'CONF', 'INST', 'STATUS', 'CREATED'];
 
   const renderBodyRow = ({ id, pair, buysell, emove, etime, conf, inst, status, created}, i) => ({
     key: id || `row-${i}`,
@@ -23,10 +23,41 @@ const TradeTable = ({data}, handleEdit, handleDel) => {
     ],
   });
   
-  // console.log('check date', data)
-
   return <>
-    { data && <Table 
+    
+    { data && 
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              { headerRow.map((item) => <th>{item}</th>) }
+            </tr>
+          </thead>
+          <tbody>
+            { data.map((trade) => {
+              return (
+                <tr>
+                  <td>{trade.id.split('').splice(0,4)}</td>
+                  <td>{trade.pair}</td>
+                  <td style={{color: !!trade.buysell ? 'lightgreen' : 'red' }}>
+                    {trade.buysell === true ? 'Buy' : 'Sell'}
+                  </td>
+                  <td>{trade.emove}</td>
+                  <td>{trade.etime}</td>
+                  <td>{trade.conf}</td>
+                  <td>{trade.inst === true ? 'Yes' : 'No'}</td>
+                  <td>{trade.status === true ? 'Done' : 'Pending'}</td>
+                  <td>{trade.created.toString().split(' ').splice(1,4).join(' ')}</td>
+                </tr>
+              )
+            }) }
+          </tbody>
+        </table>
+      </div>
+    }
+    
+    {/* Semantic UI table */}
+    {/* { data && <Table 
         // basic="very" 
         padded="very" 
         sortable 
@@ -35,7 +66,7 @@ const TradeTable = ({data}, handleEdit, handleDel) => {
         renderBodyRow={renderBodyRow}
         tableData={data}
       /> 
-    }
+    } */}
   </>
 }
 

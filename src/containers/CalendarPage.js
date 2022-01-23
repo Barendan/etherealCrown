@@ -110,6 +110,9 @@ const CalendarPage = () => {
           startAccessor="start"
           endAccessor="end"
           resizable
+          selectable
+          toolbar
+          popup
           style={{ height: '70vh' }}
           />
         </div>
@@ -118,3 +121,32 @@ const CalendarPage = () => {
 }
 
 export default CalendarPage;
+
+
+
+// onSelectSlot
+// A callback fired when a date selection is made. Only fires when selectable is true.
+
+// (
+//   slotInfo: {
+//     start: Date,
+//     end: Date,
+//     slots: Array<Date>,
+//     action: "select" | "click" | "doubleClick",
+//     bounds: ?{ // For "select" action
+//       x: number,
+//       y: number,
+//       top: number,
+//       right: number,
+//       left: number,
+//       bottom: number,
+//     },
+//     box: ?{ // For "click" or "doubleClick" actions
+//       clientX: number,
+//       clientY: number,
+//       x: number,
+//       y: number,
+//     },
+//   }
+// ) => any
+// type: Function
