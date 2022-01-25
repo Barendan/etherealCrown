@@ -114,7 +114,7 @@ const TradeForm = ({addModal}) => {
       </Button.Group>
     </Form.Group>
 
-    <Form.Group widths="5">
+    <Form.Group widths="2">
       <Form.Field
         name="emove"
         control={Select}
@@ -131,17 +131,9 @@ const TradeForm = ({addModal}) => {
         placeholder='1 hour'
         onChange={(e,data) => updateSField("etime", data.value)}
       />
-      <Form.Field
-        name="etime"
-        control={Select}
-        label='Confidence'
-        options={options.conf}
-        placeholder='1'
-        onChange={(e,data) => updateSField("conf", data.value)}
-      />
     </Form.Group>
 
-    <Form.Group widths="5">
+    <Form.Group widths="2">
       <Form.Checkbox 
         toggle 
         label="Sup or Res?"
@@ -154,6 +146,14 @@ const TradeForm = ({addModal}) => {
         checked={sField.inst}
         onClick={() => updateSField("inst",  !sField.inst)}
       />
+      <Form.Field
+        name="etime"
+        control={Select}
+        label='Confidence'
+        options={options.conf}
+        placeholder='1'
+        onChange={(e,data) => updateSField("conf", data.value)}
+      />
       
     </Form.Group>
     {/* {error} */}
@@ -162,7 +162,7 @@ const TradeForm = ({addModal}) => {
       header='Error Occurred'
       content="You forgot to fill out a field."
     />
-    <Form.Field control={Button}>Add Trade</Form.Field>
+    <Form.Field positive control={Button}>Add Trade</Form.Field>
     </Form>
   )
 }
