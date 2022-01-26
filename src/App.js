@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import GetMoney from './containers/GetMoney';
 import TodoApp from './containers/TodoApp';
+import People from './containers/People';
 import TradeStop from './containers/TradeStop';
 import Calendar from './containers/CalendarPage';
 import BlogPage from './containers/BlogPage';
@@ -65,6 +66,11 @@ const Home = () => <>
         </NavLink> 
       </li>
       <li style={{padding: "1.5rem", fontSize: "1.3rem"}}>  
+        <NavLink to="people">
+          People Page
+        </NavLink> 
+      </li>
+      <li style={{padding: "1.5rem", fontSize: "1.3rem"}}>  
         <NavLink to="trade">
           TradeStop
         </NavLink> 
@@ -94,11 +100,12 @@ export default function App() {
         <Routes>
           <Route path="/trade" element={<TradeStop />} />
           <Route path="/million" element={<GetMoney />} />
-          <Route path="/todo" element={<TodoApp />} />
+          <Route path="/people" element={<People />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/blog" element={<BlogPage />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/todo" element={<TodoApp />} />
           <Route path="/noauth" element={<NoAuth />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </div>
     </Router>
