@@ -2,8 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import { Header, Table, Image } from 'semantic-ui-react'
 
-
-
 const tableData = [
   { name: 'John', age: 15, gender: 'Male' },
   { name: 'Amber', age: 40, gender: 'Female' },
@@ -25,7 +23,7 @@ function exampleReducer(state, action) {
       if (state.column === action.column) {
         return {
           ...state,
-          data: state.data.slice().reverse(),
+          data: state.sortableData.slice().reverse(),
           direction:
             state.direction === 'ascending' ? 'descending' : 'ascending',
         }
@@ -33,7 +31,7 @@ function exampleReducer(state, action) {
 
       return {
         column: action.column,
-        data: _.sortBy(state.data, [action.column]),
+        data: _.sortBy(state.sortableData, [action.column]),
         direction: 'ascending',
       }
     default:
@@ -41,13 +39,13 @@ function exampleReducer(state, action) {
   }
 }
 
-const PeopleList = () => {
+const PeopleList = ({data}) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     column: null,
-    data: tableData,
+    sortableData: tableData,
     direction: null,
   })
-    const { column, data, direction } = state
+  const { column, sortableData, direction } = state;
 
   return (
     <div className="peo-list">
@@ -59,25 +57,29 @@ const PeopleList = () => {
               sorted={column === 'name' ? direction : null}
               onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'name' })}
             >
-              Person
+              Person List
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {data.map(({ name }) => (
-            <Table.Row key={name}>
-              {/* <Table.Cell>{name}</Table.Cell> */}
+
+          {data.map(({firstName, lastName, career, gender}, i) => (
+            <Table.Row key={i}>
+              
               <Table.Cell>
                 <Header as='h4' image>
-                  <Image src='/fem1.png' rounded size='mini' />
+                  <Image src={ gender === 'female' ? '/fem1.png' : '/male1.png'} rounded size='mini' />
                   <Header.Content>
-                    Lena
-                    <Header.Subheader>Human Resources</Header.Subheader>
+                  {firstName} {lastName}
+                  <Header.Subheader>{career}</Header.Subheader>
                   </Header.Content>
                 </Header>
               </Table.Cell>
+            
             </Table.Row>
           ))}
+
+
         </Table.Body>
       </Table>
     </div>

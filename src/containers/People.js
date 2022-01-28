@@ -1,35 +1,34 @@
 import { useState, useEffect } from 'react';
-import { Container, Header, Divider, Button, Modal } from 'semantic-ui-react';
+import { Header, Divider, Button, Modal } from 'semantic-ui-react';
+
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import {db} from '../firebase';
+
 
 import PeopleList from '../components/peopleList';
 import PeopleForm from '../components/peopleForm';
 import PeoplePane from '../components/peoplePane';
 
-const peopleData = [
-  {
-    firstName: 'daniel',
-    lastName: 'barenboim',
-    location: 'florida',
-    dob: '04/20/1992',
-    relationship: 'single',
-    career: 'programmer',
-    parents: 'distant',
-    howmet: 'related',
-    gender: 'male',
-    hobbies: [],
-    triggers: [],
-    virtues: [],
-    vices: [],
-  }
-]
-
 const People = () => {
+  const [allPeople, setAllPeople] = useState([]);
   const [addModal, setAddModal] = useState(false);
 
+  useEffect(() => {
+    const q = query(collection(db, 'people'))
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      setAllPeople(querySnapshot.docs.map(doc => {
+        let item = doc.data();
+        // item.created = toDateTime(item.created.seconds);
+        return item
+      }))
+    })
+
+    return () => unsubscribe();
+  },[])
 
   return (
     <div className="peo-container">
-      <PeopleList />
+      <PeopleList data={allPeople} />
       <PeoplePane />
 
       <Modal
