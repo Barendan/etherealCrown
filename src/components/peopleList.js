@@ -63,16 +63,16 @@ const PeopleList = ({data, setPerson}) => {
         </Table.Header>
         <Table.Body>
 
-          {data.map(({firstName, lastName, career, gender}, i) => (
+          {data.map((data, i) => (
             <Table.Row key={i}>
               
               <Table.Cell selectable>
-                <a onClick={() => setPerson(firstName)}>
+                <a onClick={() => setPerson({...data})}>
                   <Header as='h4' image>
-                    <Image src={ gender === 'female' ? '/fem1.png' : '/male1.png'} rounded size='mini' />
+                    <Image src={ data.gender === 'female' ? '/fem1.png' : '/male1.png'} rounded size='mini' />
                     <Header.Content>
-                    {firstName} {lastName}
-                    <Header.Subheader>{career}</Header.Subheader>
+                    {data.firstName} {data.lastName}
+                    <Header.Subheader>{data.career}</Header.Subheader>
                     </Header.Content>
                   </Header>
                 </a>

@@ -42,7 +42,7 @@ const People = () => {
         </Header>
 
         <Modal.Content>
-          <PeopleForm addModal={setAddModal}/>
+          <PeopleForm addModal={setAddModal} />
         </Modal.Content>
 
       </Modal>
