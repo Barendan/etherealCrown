@@ -39,7 +39,7 @@ function exampleReducer(state, action) {
   }
 }
 
-const PeopleList = ({data}) => {
+const PeopleList = ({data, setPerson}) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     column: null,
     sortableData: data,
@@ -66,14 +66,16 @@ const PeopleList = ({data}) => {
           {data.map(({firstName, lastName, career, gender}, i) => (
             <Table.Row key={i}>
               
-              <Table.Cell>
-                <Header as='h4' image>
-                  <Image src={ gender === 'female' ? '/fem1.png' : '/male1.png'} rounded size='mini' />
-                  <Header.Content>
-                  {firstName} {lastName}
-                  <Header.Subheader>{career}</Header.Subheader>
-                  </Header.Content>
-                </Header>
+              <Table.Cell selectable>
+                <a onClick={() => setPerson(firstName)}>
+                  <Header as='h4' image>
+                    <Image src={ gender === 'female' ? '/fem1.png' : '/male1.png'} rounded size='mini' />
+                    <Header.Content>
+                    {firstName} {lastName}
+                    <Header.Subheader>{career}</Header.Subheader>
+                    </Header.Content>
+                  </Header>
+                </a>
               </Table.Cell>
             
             </Table.Row>

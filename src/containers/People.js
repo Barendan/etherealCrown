@@ -9,6 +9,7 @@ import PeoplePane from '../components/peoplePane';
 
 const People = () => {
   const [allPeople, setAllPeople] = useState([]);
+  const [sPerson, setSPerson] = useState({});
   const [addModal, setAddModal] = useState(false);
 
   useEffect(() => {
@@ -23,10 +24,11 @@ const People = () => {
     return () => unsubscribe();
   },[])
 
+
   return (
     <div className="peo-container">
-      <PeopleList data={allPeople} />
-      <PeoplePane />
+      <PeopleList data={allPeople} setPerson={setSPerson} />
+      <PeoplePane data={sPerson} />
 
       <Modal
         onOpen={() => setAddModal(true)}
