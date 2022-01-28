@@ -235,3 +235,41 @@ h2 a {
   background-size: cover;
   overflow: hidden;
 }
+
+
+
+
+
+
+/* ======================================================================= */
+                  /* PEOPLE PAGE */
+/* ======================================================================= */
+.peo-container {
+  display: flex;
+  margin: 20px;
+}
+
+.peo-list {
+  flex: 1.5;
+  /* width: 300px; */
+  /* height: 700px; */
+  /* margin-right: 20px; */
+}
+
+.peo-pane {
+  flex: 5;
+  background-color: rgba(128, 157, 255, 0.315);
+  width: 80% ;
+  height: 800px;
+  margin-left: 20px;
+}
+
+.btn-pos {
+  position: absolute;
+  bottom: 0;
+  /* left: 10; */
+  /* flex: 1; */
+  /* background-color: green; */
+}
+
+

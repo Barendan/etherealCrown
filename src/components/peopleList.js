@@ -50,7 +50,7 @@ const PeopleList = () => {
     const { column, data, direction } = state
 
   return (
-    <div style={{ width: 300, height: 700, marginRight: 20 }}>
+    <div className="peo-list">
       <Table sortable selectable celled fixed>
         <Table.Header>
           <Table.Row>

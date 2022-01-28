@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import { Container, Header, Divider, Button, Modal, Icon } from 'semantic-ui-react';
+import { Container, Header, Divider, Button, Modal } from 'semantic-ui-react';
 
 import TradeForm from '../components/tradeForm';
 import TradeTable from '../components/tradeTable';
