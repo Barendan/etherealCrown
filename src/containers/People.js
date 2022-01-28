@@ -36,12 +36,12 @@ const People = () => {
         onOpen={() => setAddModal(true)}
         onClose={() => setAddModal(false)}
         open={addModal}
-        size='tiny'
+        // size='tiny'
         trigger={ <Button size="massive" className="newpost-btn btn-pos">+ Add Person</Button> }
       >
         <Header icon>
           {/* <Icon name='archive' /> */}
-          {/* Archive Old Messages */}
+          <h1>Add New Person</h1>
         </Header>
 
         <Modal.Content>

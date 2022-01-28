@@ -4,46 +4,43 @@ import {
   Form,
   Input,
   Select,
-  Message
+  Message,
+  Radio,
+  TextArea,
 } from 'semantic-ui-react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { db } from '../firebase';
 import { addDoc, collection } from "firebase/firestore";
 
-
 const options = {
-  emove: [
-    { key: '5', text: '5%', value: '5' },
-    { key: '10', text: '10%', value: '10' },
-    { key: '20', text: '20%', value: '20' },
-    { key: '50', text: '50%', value: '50' },
+  gender: [
+    { key: 'm', text: 'Male', value: 'male' },
+    { key: 'f', text: 'Female', value: 'female' },
+    { key: 'o', text: 'Other', value: 'unknown' },
   ],
-  etime: [
-    { key: '1', text: '1 hour', value: '1' },
-    { key: '6', text: '6 hours', value: '6' },
-    { key: '12', text: '12 hours', value: '12' },
-    { key: '24', text: '24 hours', value: '24' },
-  ],
-  conf: [
-    { key: '1', text: '1', value: '1' },
-    { key: '2', text: '2', value: '2' },
-    { key: '3', text: '3', value: '3' },
-    { key: '4', text: '4', value: '4' },
-    { key: '5', text: '5', value: '5' },
+  howmet: [
+    { key: 'a', text: 'Related', value: 'Related' },
+    { key: 'b', text: 'School', value: 'School' },
+    { key: 'c', text: 'Work', value: 'Work' },
+    { key: 'd', text: 'Friend', value: 'Friend' },
+    { key: 'e', text: 'Event', value: 'Event' },
   ]
 }
 
 const defaultFields = {
-  id: uuidv4(),
-  pair: '',
-  buysell: true, 
-  emove: 5, // percentage 
-  etime: 1, // hours
-  conf: 1, // confidence level 1-10
-  inst: false,
-  supres: false,
-  status: false,
+  firstName: '',
+  lastName: '',
+  location: '',
+  status: '',
+  career: '',
+  howmet: '',
+  gender: '',
+  extra: '',
+  // dob: '',
+  // hobbies: [],
+  // triggers: [],
+  // virtues: [],
+  // vices: [],
 }
 
 const PeopleForm = ({addModal}) => {
@@ -60,10 +57,9 @@ const PeopleForm = ({addModal}) => {
   }, []);
   
   const handleSubmit = async() => {
-    // Change Modal State to closed?
-    // You should really Validate the fields first
-    if (sField.pair.length > 0) {
-        await addDoc(collection(db, "trades"), {
+    console.log('sField reveal:', sField)
+    if (sField.location.length > 0) {
+        await addDoc(collection(db, "people"), {
           ...sField,
           created: new Date()
       })
@@ -77,95 +73,156 @@ const PeopleForm = ({addModal}) => {
     
     addModal(false);
     setSField(defaultFields);
-    // setTimeout(() => {
-    //   alert(JSON.stringify(sField, null, 2));
-    //   // setSubmitting(false);
-    // }, 400)
   }
     
   return (
     <div>
       
-      <Form 
+      <Form
         size="big"
         onSubmit={handleSubmit}
         error={error}
       >
-      <Form.Group widths='equal'>
-        <Form.Field
-          control={Input}
-          name="pair"
-          label='Currency Pair:'
-          placeholder='BTC-USDT'
-          value={sField.pair}
-          onChange={(e,data) => updateSField("pair", data.value)}
-        />
-        <Button.Group size='large'>
-          <Button 
-            toggle 
-            positive
-            type="button"
-            onClick={() => updateSField("buysell",  true)}
-          > Buy </Button>
-          <Button.Or />
-          <Button 
-            toggle 
-            negative
-            type="button"
-            onClick={() => updateSField("buysell",  false)}
-          > Sell </Button>
-        </Button.Group>
-      </Form.Group>
-
-      <Form.Group widths="2">
-        <Form.Field
-          name="emove"
-          control={Select}
-          label='Expected Move'
-          options={options.emove}
-          placeholder='5%'
-          onChange={(e,data) => updateSField("emove", data.value)}
+        <Form.Group widths='equal'>
+          <Form.Field
+            control={Input}
+            label='First name'
+            placeholder='First name'
+            value={sField.firstName}
+            onChange={(e,data) => updateSField("firstName", data.value)}
           />
-        <Form.Field
-          name="etime"
-          control={Select}
-          label='Expected Time'
-          options={options.etime}
-          placeholder='1 hour'
-          onChange={(e,data) => updateSField("etime", data.value)}
-        />
-      </Form.Group>
+          <Form.Field
+            control={Input}
+            label='Last name'
+            placeholder='Last name'
+            value={sField.lastName}
+            onChange={(e,data) => updateSField("lastName", data.value)}
+          />
+          <Form.Field
+            control={Select}
+            label='Gender'
+            options={options.gender}
+            placeholder='Gender'
+            value={sField.gender}
+            onChange={(e,data) => updateSField("gender", data.value)}
+          />
+        </Form.Group>
 
-      <Form.Group widths="2">
-        <Form.Checkbox 
-          toggle 
-          label="Sup or Res?"
-          checked={sField.supres}
-          onClick={() => updateSField("supres",  !sField.supres)}
-        />
-        <Form.Checkbox 
-          toggle 
-          label="Instinct"
-          checked={sField.inst}
-          onClick={() => updateSField("inst",  !sField.inst)}
-        />
-        <Form.Field
-          name="etime"
-          control={Select}
-          label='Confidence'
-          options={options.conf}
-          placeholder='1'
-          onChange={(e,data) => updateSField("conf", data.value)}
-        />
+        <Form.Group widths='equal'>
+          <Form.Field
+            control={Input}
+            label='Location'
+            placeholder='Location'
+            value={sField.location}
+            onChange={(e,data) => updateSField("location", data.value)}
+          />
+          <Form.Field
+            control={Input}
+            label='Career'
+            placeholder='Career'
+            value={sField.career}
+            onChange={(e,data) => updateSField("career", data.value)}
+          />
+          <Form.Field
+            control={Select}
+            label='How we met'
+            options={options.howmet}
+            placeholder='Related'
+            value={sField.howmet}
+            onChange={(e,data) => updateSField("howmet", data.value)}
+          />
+        </Form.Group>
+
+        <Form.Group inline>
+          <label>Status</label>
+          <Form.Field
+            control={Radio}
+            label='Single'
+            value='Single'
+            checked={sField.status === 'Single'}
+            onChange={(e, {value}) => updateSField("status", value)}
+          />
+          <Form.Field
+            control={Radio}
+            label='Taken'
+            value='Taken'
+            checked={sField.status === 'Taken'}
+            onChange={(e, {value}) => updateSField("status", value)}
+
+          />
+          <Form.Field
+            control={Radio}
+            label='Unknown'
+            value='Unknown'
+            checked={sField.status === 'Unknown'}
+            onChange={(e, {value}) => updateSField("status", value)}
+
+          />
+        </Form.Group>
+
+        {/* <Form.Group inline>
+          <label>Virtues</label>
+          <Form.Field
+            control={Radio}
+            label='One'
+            value='1'
+            checked={value === '1'}
+            onChange={(e, {value}) => setValue(value)}
+          />
+          <Form.Field
+            control={Radio}
+            label='Two'
+            value='2'
+            checked={value === '2'}
+            onChange={(e, {value}) => setValue(value)}
+          />
+          <Form.Field
+            control={Radio}
+            label='Three'
+            value='3'
+            checked={value === '3'}
+            onChange={(e, {value}) => setValue(value)}
+          />
+        </Form.Group> */}
         
-      </Form.Group>
-      {/* {error} */}
-      <Message
-        error
-        header='Error Occurred'
-        content="You forgot to fill out a field."
-      />
-      <Form.Field positive control={Button}>Add Trade</Form.Field>
+        {/* <Form.Group inline>
+          <label>Vices</label>
+          <Form.Field
+            control={Radio}
+            label='One'
+            value='1'
+            checked={value === '1'}
+            onChange={(e, {value}) => setValue(value)}
+          />
+          <Form.Field
+            control={Radio}
+            label='Two'
+            value='2'
+            checked={value === '2'}
+            onChange={(e, {value}) => setValue(value)}
+          />
+          <Form.Field
+            control={Radio}
+            label='Three'
+            value='3'
+            checked={value === '3'}
+            onChange={(e, {value}) => setValue(value)}
+          />
+        </Form.Group> */}
+        
+        <Form.Field
+          control={TextArea}
+          label='Additional Notes'
+          placeholder='What else is there...'
+          value={sField.extra}
+          onChange={(e,data) => updateSField("extra", data.value)}
+        />
+        <Message
+          error
+          header='Error Occurred'
+          content="You forgot to fill out a field."
+        />
+        <Form.Field positive control={Button}>Submit</Form.Field>
       </Form>
     </div>
   )
