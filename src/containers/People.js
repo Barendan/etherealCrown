@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Header, Divider, Button, Modal } from 'semantic-ui-react';
-
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot } from "firebase/firestore";
 import {db} from '../firebase';
-
 
 import PeopleList from '../components/peopleList';
 import PeopleForm from '../components/peopleForm';
@@ -18,7 +16,6 @@ const People = () => {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       setAllPeople(querySnapshot.docs.map(doc => {
         let item = doc.data();
-        // item.created = toDateTime(item.created.seconds);
         return item
       }))
     })
@@ -35,7 +32,6 @@ const People = () => {
         onOpen={() => setAddModal(true)}
         onClose={() => setAddModal(false)}
         open={addModal}
-        // size='tiny'
         trigger={ <Button size="massive" className="newpost-btn btn-pos">+ Add Person</Button> }
       >
         <Header icon>
@@ -45,20 +41,7 @@ const People = () => {
 
         <Modal.Content>
           <PeopleForm addModal={setAddModal}/>
-          {/* <p>
-            Your inbox is getting full, would you like us to enable automatic
-            archiving of old messages?
-          </p> */}
         </Modal.Content>
-
-        <Modal.Actions>
-          {/* <Button basic color='red' inverted onClick={() => setAddModal(false)}>
-            <Icon name='remove' /> No
-          </Button>
-          <Button color='green' inverted onClick={() => setAddModal(false)}>
-            <Icon name='checkmark' /> Yes
-          </Button> */}
-        </Modal.Actions>
 
       </Modal>
     </div>

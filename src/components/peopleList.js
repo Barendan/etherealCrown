@@ -42,7 +42,7 @@ function exampleReducer(state, action) {
 const PeopleList = ({data}) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     column: null,
-    sortableData: tableData,
+    sortableData: data,
     direction: null,
   })
   const { column, sortableData, direction } = state;
