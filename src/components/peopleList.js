@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { Header, Table, Image } from 'semantic-ui-react'
+import { Header, Table, Image, Button } from 'semantic-ui-react'
 
 const tableData = [
   { name: 'John', age: 15, gender: 'Male' },
@@ -39,7 +39,7 @@ function exampleReducer(state, action) {
   }
 }
 
-const PeopleList = ({data, setPerson}) => {
+const PeopleList = ({data, setPerson, editPerson, deletePerson}) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     column: null,
     sortableData: data,
@@ -67,14 +67,31 @@ const PeopleList = ({data, setPerson}) => {
             <Table.Row key={i}>
               
               <Table.Cell selectable>
-                <a onClick={() => setPerson({...data})}>
+                <a className="person-item" onClick={() => setPerson({...data})}>
                   <Header as='h4' image>
                     <Image src={ data.gender === 'female' ? '/fem1.png' : '/male1.png'} rounded size='mini' />
                     <Header.Content>
-                    {data.firstName} {data.lastName}
-                    <Header.Subheader>{data.career}</Header.Subheader>
+                      {data.firstName} {data.lastName}
+
+                      <Header.Subheader>{data.career}</Header.Subheader>
                     </Header.Content>
                   </Header>
+                  <div>
+                    <Button 
+                      size="mini" 
+                      color='green' 
+                      icon='edit' 
+                      onClick={() => console.log('edit now')}
+                      // onClick={() => editPerson()} 
+                    />
+                    <Button 
+                      size="mini" 
+                      color='red' 
+                      icon='trash' 
+                      onClick={() => console.log('deleted')} 
+                      // onClick={() => deletePerson(data.id)} 
+                    />
+                  </div>
                 </a>
               </Table.Cell>
             

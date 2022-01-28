@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Header, Divider, Button, Modal } from 'semantic-ui-react';
+import { Header, Button, Modal } from 'semantic-ui-react';
 import { collection, query, onSnapshot } from "firebase/firestore";
 import {db} from '../firebase';
 
@@ -24,22 +24,31 @@ const People = () => {
     return () => unsubscribe();
   },[])
 
+  const handleEdit = () => {
+
+  }
+
+  const handleDelete = () => {
+    
+  }
 
   return (
     <div className="peo-container">
-      <PeopleList data={allPeople} setPerson={setSPerson} />
+      <PeopleList 
+        data={allPeople} 
+        setPerson={setSPerson} 
+        editPerson={handleEdit} 
+        deletePerson={handleDelete} 
+      />
       <PeoplePane data={sPerson} />
 
       <Modal
         onOpen={() => setAddModal(true)}
         onClose={() => setAddModal(false)}
         open={addModal}
-        trigger={ <Button size="massive" className="newpost-btn btn-pos">+ Add Person</Button> }
+        trigger={ <Button size="massive" className="newpost-btn btn-pos">Add Person</Button> }
       >
-        <Header icon>
-          {/* <Icon name='archive' /> */}
-          <h1>Add New Person</h1>
-        </Header>
+        <Header as="h1" icon>Add New Person</Header>
 
         <Modal.Content>
           <PeopleForm addModal={setAddModal} />
@@ -47,7 +56,6 @@ const People = () => {
 
       </Modal>
     </div>
-
   )
 }
 
