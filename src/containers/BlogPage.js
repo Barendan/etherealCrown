@@ -18,16 +18,16 @@ const samplePosts = [
   {
     id: 1,
     public: true,
-    title: 'First Post',
-    content: 'first post lots of content in here oh shit',
-    date: '1/10/2022',
+    title: 'Second Post',
+    content: 'second post lots of content in here oh shit',
+    date: '1/22/2022',
   },
   {
     id: 1,
     public: true,
-    title: 'First Post',
-    content: 'first post lots of content in here oh shit',
-    date: '1/10/2022',
+    title: 'Third Post',
+    content: 'third post lots of content in here oh shit',
+    date: '1/31/2022',
   }
 ];
 
